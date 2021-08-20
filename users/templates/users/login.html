@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<head>
-    <title>Login</title>
-</head>
-<body>
+{% extends "shop/layout.html" %}
+
+{% block body %}
     {% if message %}
-        <div>{{ message }}</div>
+    <div>{{ message }}</div>
     {%  endif %}
-    <form action="{% url 'login' %}" method="post">
+    <form action="{% url 'users:login' %}" method="post">
         {% csrf_token %}
-        <input type="email" placeholder="email" name="email">
+        <input type="text" placeholder="username" name="username">
         <input type="password" placeholder="password" name="password">
         <button type="submit">Login</button>
     </form>
-</body>
+{% endblock %}

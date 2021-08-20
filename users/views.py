@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
+from django.db import IntegrityError
 from .forms import RegistrationForm
 from .models import User
 
@@ -8,11 +9,10 @@ def register(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         form.is_valid()
+        username = form.cleaned_data["username"]
         email = form.cleaned_data["email"]
         password = form.cleaned_data["password"]
         confirmation_password = form.cleaned_data["confirmation_password"]
-        first_name = form.cleaned_data["first_name"]
-        last_name = form.cleaned_data["last_name"]
 
         if password != confirmation_password:
             return render(request, "users/register.html", {
@@ -20,9 +20,15 @@ def register(request):
                 "form": form
             })
         else:
-            user = User(username=email, email=email, password=password, first_name=first_name, last_name=last_name)
-            user.save()
-            return redirect("login")
+            try:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user.save()
+            except IntegrityError:
+                return render(request, "users/register.html", {
+                    "message": "Email already exists",
+                    "form": form
+                })
+            return redirect("users:login")
     else:
         return render(request, "users/register.html", {
             "form": RegistrationForm
@@ -30,15 +36,15 @@ def register(request):
 
 def login_view(request):
     if request.method == "POST":
-        email = request.POST["email"]
+        username = request.POST["username"]
         password = request.POST["password"]
-        user = authenticate(request, username=email, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
-            return render(request, "")
+            return redirect("shop:index")
         else:
-            return render(request, "user/login.html", {
+            return render(request, "users/login.html", {
                 "message": "email or password is invalid"
             })
     else:
@@ -46,4 +52,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect("login")
+    return redirect("users:login")
+
+def profile(request):
+    return render(request, "users/profile.html")

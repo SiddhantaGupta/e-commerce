@@ -1,1 +1,15 @@
 {% extends "shop/layout.html" %}
+
+{% block body %}
+
+{% for product in latest_products %}
+    <div>
+        <h4>{{ product.title }}</h4>
+        <p>{{ product.price }}</p>
+        {% for category in product.product.all %}
+        <p>{{ category }}</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+
+{% endblock %}

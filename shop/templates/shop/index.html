@@ -6,9 +6,7 @@
     <div>
         <h4>{{ product.title }}</h4>
         <p>{{ product.price }}</p>
-        {% for category in product.product.all %}
-        <p>{{ category }}</p>
-        {% endfor %}
+        <p>{{ product.category }}</p>
     </div>
 {% endfor %}
 

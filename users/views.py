@@ -56,3 +56,6 @@ def logout_view(request):
 
 def profile(request):
     return render(request, "users/profile.html")
+
+def addresses(request, id):
+    pass

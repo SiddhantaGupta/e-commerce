@@ -15,13 +15,10 @@ class Products(models.Model):
     quantity = models.IntegerField()
     category = models.ForeignKey(Categories, on_delete=models.CASCADE, related_name="products")
     date = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField()
 
     def __str__(self):
         return f"{self.title}"
-
-class Images(models.Model):
-    image = models.ImageField(upload_to='product')
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name="product_image")
 
 class Comments(models.Model):
     comment = models.CharField(max_length=256)

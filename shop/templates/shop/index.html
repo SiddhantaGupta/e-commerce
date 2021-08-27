@@ -2,12 +2,28 @@
 
 {% block body %}
 
+<form action="{% url 'shop:search' %}">
+    <select name=category>
+        <option value="">--select category--</option>
+        {% for category in categories %}
+            <option value="{{ category.category }}">{{ category.category }}</option>
+        {% endfor %}
+    </select>
+    <input type="text" name="search" placeholder="search" autofocus>
+    <button type="submit">search</button>
+</form>
+
+{% if message %}
+{{ message }}
+{% else %}
 {% for product in latest_products %}
-    <div>
-        <h4>{{ product.title }}</h4>
-        <p>{{ product.price }}</p>
-        <p>{{ product.category }}</p>
-    </div>
+<div>
+    <img src="{{product.image.url}}">
+    <h4>{{ product.title }}</h4>
+    <p>{{ product.price }}</p>
+    <p>{{ product.category }}</p>
+</div>
 {% endfor %}
+{% endif %}
 
 {% endblock %}

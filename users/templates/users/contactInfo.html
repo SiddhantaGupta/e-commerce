@@ -1,0 +1,31 @@
+{% extends "shop/layout.html" %}
+
+{% block body %}
+
+<a href="{% url 'users:addContact' user.id %}"><button type=submit>Add new address</button></a>
+
+{% for address in addresses %}
+    <div>
+        <tr>
+            <th>Name:</th>
+            <td>{{ address.first_name }}{{ address.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Address:</th>
+            <td>{{ address.address }}</td>
+        </tr>
+        <tr>
+            <th>Phone Number:</th>
+            <td>{{ address.phone_number }}</td>
+        </tr>
+        <tr>
+            <th>ZIP code:</th>
+            <td>{{ address.postal_code }}</td>
+        </tr>
+        <a href="{% url 'users:deleteContact' address.id %}"><button type="submit">Delete address</button></a>
+        </div>
+{% empty %}
+    <li>You have no saved addresses</li>
+{% endfor %}
+
+{% endblock %}

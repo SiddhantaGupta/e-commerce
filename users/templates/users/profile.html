@@ -3,6 +3,6 @@
 {% block body %}
 {{ user.username }}
 <ul>
-    <li><a href="{% url 'users:addresses' user.id %}">manage contact info</a></li>
+    <li><a href="{% url 'users:contactInfo' user.id %}">manage contact info</a></li>
 </ul>
 {% endblock %}

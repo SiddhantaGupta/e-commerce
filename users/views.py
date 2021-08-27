@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
-from .forms import RegistrationForm
-from .models import User
+from .forms import RegistrationForm, ContactForm
+from .models import User, ContactInfo
 
 # Create your views here.
 def register(request):
@@ -57,5 +57,29 @@ def logout_view(request):
 def profile(request):
     return render(request, "users/profile.html")
 
-def addresses(request, id):
-    pass
+def contactInfo(request, id):
+    addresses = ContactInfo.objects.filter(user=request.user)
+    return render(request, "users/contactInfo.html", {
+        "addresses": addresses
+    })
+
+def addContact(request, id):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        form.is_valid()
+        first_name = form.cleaned_data["first_name"]
+        last_name = form.cleaned_data["last_name"]
+        address = form.cleaned_data["address"]
+        phone_number = form.cleaned_data["phone_number"]
+        postal_code = form.cleaned_data["postal_code"]
+        new_contact = ContactInfo.objects.create(first_name=first_name, last_name=last_name, address=address, phone_number=phone_number, postal_code=postal_code, user=request.user)
+        new_contact.save()
+        return redirect("users:contactInfo", id=id)
+
+    return render(request, "users/addContact.html", {
+        "form": ContactForm
+    })
+
+def deleteContact(request, contactId):
+    ContactInfo.objects.get(pk=contactId).delete()
+    return redirect("users:contactInfo", id=request.user.id)

@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import User
 
 # Create your models here.
 class Categories(models.Model):
@@ -21,3 +22,8 @@ class Products(models.Model):
 class Images(models.Model):
     image = models.ImageField(upload_to='product')
     product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name="product_image")
+
+class Comments(models.Model):
+    comment = models.CharField(max_length=256)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name="reviews")

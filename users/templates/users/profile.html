@@ -4,5 +4,6 @@
 {{ user.username }}
 <ul>
     <li><a href="{% url 'users:contactInfo' user.id %}">manage contact info</a></li>
+    <li><a href="{% url 'shop:purchases' %}">Purchase History</a></li>
 </ul>
 {% endblock %}

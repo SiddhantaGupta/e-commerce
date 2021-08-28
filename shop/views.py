@@ -74,3 +74,9 @@ def purchase(request, id):
         "product": product,
         "addresses": addresses,
     })
+
+def purchases(request):
+    purchase_history = Purchases.objects.filter(user=request.user)
+    return render(request, "shop/purchases.html", {
+        "purchases": purchase_history,
+    })

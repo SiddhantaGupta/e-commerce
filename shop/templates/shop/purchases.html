@@ -1,0 +1,17 @@
+{% extends "shop/layout.html" %}
+
+{% block body %}
+
+{% for purchase in purchases %}
+
+<div>
+    Item Purchased: <a href="{% url 'shop:product' purchase.product.id %}">{{ purchase.product.title }}</a>
+    <p>Quantity Purchased: {{ purchase.quantity }}</p>
+</div>
+    
+{% empty %}
+<p>You have not made any purchases.</p>
+
+{% endfor %}
+
+{% endblock %}

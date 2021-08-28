@@ -1,0 +1,30 @@
+{% extends "shop/layout.html" %}
+
+{% block body %}
+
+<div>
+    <img src="{{ product.image.url }}">
+    <h2>{{ product.title }}</h2>
+    <p>{{ product.description }}</p>
+    <p>Price: &#8377; {{ product.price }}</p>
+    <p>No. of Item in stock: {{ product.quantity }}</p>
+    <p>{{ product.cateogory }}</p>
+    <p>Posted On: {{ product.date }}</p>
+    <form action="{% url 'shop:purchase' product.id %}">
+        {% csrf_token %}
+        <button type="submit">Buy</button>
+    </form>
+</div>
+
+<div>
+    <form action="{% url 'shop:comment' product.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" placeholder="comment" name="comment">
+        <button type="submit">post</button>
+    </form>
+    {% for comment in comments %}
+    <p>{{ comment.user.username }}: {{ comment.comment }}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

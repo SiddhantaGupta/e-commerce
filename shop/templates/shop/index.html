@@ -17,13 +17,15 @@
 {{ message }}
 {% else %}
 {% for product in latest_products %}
-<div>
-    <img src="{{product.image.url}}">
-    <h4>{{ product.title }}</h4>
-    <p>{{ product.price }}</p>
-    <p>{{ product.category }}</p>
-</div>
-{% endfor %}
+<a href="{% url 'shop:product' product.id %}">
+    <div>
+        <img src="{{product.image.url}}">
+        <h4>{{ product.title }}</h4>
+        <p>{{ product.price }}</p>
+        <p>{{ product.category }}</p>
+    </div>
+</a>
+    {% endfor %}
 {% endif %}
 
 {% endblock %}

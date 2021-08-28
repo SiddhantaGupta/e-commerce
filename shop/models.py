@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import User
+from users.models import User, ContactInfo
 
 # Create your models here.
 class Categories(models.Model):
@@ -24,3 +24,10 @@ class Comments(models.Model):
     comment = models.CharField(max_length=256)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
     product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name="reviews")
+
+class Purchases(models.Model):
+    product = models.ForeignKey(Products, on_delete=models.PROTECT, related_name="purchased_item")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="buyer")
+    quantity = models.IntegerField()
+    deliver_to = models.ForeignKey(ContactInfo, on_delete=models.PROTECT, related_name="delivery_address")
+    delivery_status = models.BooleanField(default=False)

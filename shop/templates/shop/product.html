@@ -10,6 +10,20 @@
     <p>No. of Item in stock: {{ product.quantity }}</p>
     <p>{{ product.cateogory }}</p>
     <p>Posted On: {{ product.date }}</p>
+
+    {% if user.is_authenticated %}
+    {% if in_cart %}
+    <form action="{% url 'cart:remove' product.id %}">
+        {% csrf_token %}
+        <button type="submit">Remove from Cart</button>
+    </form>
+    {% else %}
+    <form action="{% url 'cart:add' product.id %}">
+        {% csrf_token %}
+        <button type="submit">Add to Cart</button>
+    </form>
+    {% endif %}
+    
     <form action="{% url 'shop:purchase' product.id %}">
         {% csrf_token %}
         <button type="submit">Buy</button>
@@ -22,6 +36,7 @@
         <input type="text" placeholder="comment" name="comment">
         <button type="submit">post</button>
     </form>
+    {% endif %}
     {% for comment in comments %}
     <p>{{ comment.user.username }}: {{ comment.comment }}</p>
     {% endfor %}

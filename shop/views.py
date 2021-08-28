@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Products, Categories, Comments, Purchases
 from users.models import ContactInfo
+from cart.models import Cart
 
 # Create your views here.
 def index(request):
@@ -32,9 +33,17 @@ def search(request):
 def product(request, id):
     product = Products.objects.get(pk=id)
     comments = Comments.objects.filter(product=product)
+    in_cart = False
+    if request.user.is_authenticated:
+        wishlist = Cart.objects.filter(user=request.user)
+        for wish in wishlist:
+            if product.id == wish.product.id:
+                in_cart = True
+
     return render(request, "shop/product.html", {
         "product": product,
         "comments": comments,
+        "in_cart": in_cart,
     })
 
 def comment(request, id):

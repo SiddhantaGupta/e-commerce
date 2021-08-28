@@ -1,0 +1,18 @@
+{% extends "shop/layout.html" %}
+
+{% block body %}
+
+{% for wish in wishlist %}
+<a href="{% url 'shop:product' wish.product.id %}">
+    <div>
+        <img src="{{wish.product.image.url}}">
+        <h4>{{ wish.product.title }}</h4>
+        <p>{{ wish.product.price }}</p>
+        <p>{{ wish.product.category }}</p>
+    </div>
+</a>
+{% empty %}
+<p>There is nothing in Cart.</p>
+{% endfor %}
+
+{% endblock %}

@@ -3,29 +3,36 @@
 {% block body %}
 
 <form action="{% url 'shop:search' %}">
-    <select name=category>
+    <select class="form-select w-25 d-inline-block m-2" name=category>
         <option value="">--select category--</option>
         {% for category in categories %}
             <option value="{{ category.category }}">{{ category.category }}</option>
         {% endfor %}
     </select>
-    <input type="text" name="search" placeholder="search" autofocus>
-    <button type="submit">search</button>
+    <input class="form-control w-25 d-inline-block me-0" type="text" name="search" placeholder="search" autofocus>
+    <button class="btn btn-dark btn-lg ms-0" type="submit">search</button>
 </form>
 
 {% if message %}
 {{ message }}
 {% else %}
-{% for product in latest_products %}
-<a href="{% url 'shop:product' product.id %}">
-    <div>
-        <img src="{{product.image.url}}">
-        <h4>{{ product.title }}</h4>
-        <p>{{ product.price }}</p>
-        <p>{{ product.category }}</p>
+<div class="container">
+    <div class="row">
+        {% for product in latest_products %}
+        <div class="col-4 mx-auto">
+            <div class="card bg-light p-4 m-2">
+                <a href="{% url 'shop:product' product.id %}">
+                <img class="card-img-top mx-auto d-block img-thumbnail" style="height: 250px; width: 200px;" src="{{product.image.url}}">
+                <div class="card-body">
+                    <h4 class="card-title text-center fs-2">{{ product.title }}</h4>
+                    <p class="card-text">Price: &#8377;{{ product.price }}<br>Category: {{ product.category }}</p>
+                </div>
+            </a>
+        </div>
     </div>
-</a>
-    {% endfor %}
+        {% endfor %}
+    </div>
+</div>
 {% endif %}
 
 {% endblock %}

@@ -1,31 +1,25 @@
 {% extends "shop/layout.html" %}
 
 {% block body %}
+<div class="text-center m-5">
+    <a href="{% url 'users:addContact' user.id %}"><button type=submit class="btn btn-primary btn-lg">Add new address</button></a>
+</div>
+    
+<div class="container">
+    <div class="row">
 
-<a href="{% url 'users:addContact' user.id %}"><button type=submit>Add new address</button></a>
-
-{% for address in addresses %}
-    <div>
-        <tr>
-            <th>Name:</th>
-            <td>{{ address.first_name }}{{ address.last_name }}</td>
-        </tr>
-        <tr>
-            <th>Address:</th>
-            <td>{{ address.address }}</td>
-        </tr>
-        <tr>
-            <th>Phone Number:</th>
-            <td>{{ address.phone_number }}</td>
-        </tr>
-        <tr>
-            <th>ZIP code:</th>
-            <td>{{ address.postal_code }}</td>
-        </tr>
-        <a href="{% url 'users:deleteContact' address.id %}"><button type="submit">Delete address</button></a>
+        {% for address in addresses %}
+        <div class="col card p-4 m-4 bg-light" style="width: 25rem;">
+            <p class="fs-4"><b>Name:</b> {{ address.first_name }}{{ address.last_name }}<br>
+            <b>Address:</b> {{ address.address }}<br>
+            <b>Phone Number:</b> {{ address.phone_number }}<br>
+            <b>ZIP code:</b> {{ address.postal_code }}<br></p>
+            <a href="{% url 'users:deleteContact' address.id %}"><button class="btn btn-dark btn-md" type="submit">Delete address</button></a>
         </div>
-{% empty %}
-    <li>You have no saved addresses</li>
-{% endfor %}
+        {% empty %}
+        <li>You have no saved addresses</li>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}

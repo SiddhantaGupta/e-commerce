@@ -1,9 +1,9 @@
 {% extends "shop/layout.html" %}
 
 {% block body %}
-{{ user.username }}
-<ul>
-    <li><a href="{% url 'users:contactInfo' user.id %}">manage contact info</a></li>
-    <li><a href="{% url 'shop:purchases' %}">Purchase History</a></li>
+<p class="alert alert-success text-center fs-1" role="alert">You are logged in as: {{ user.username }}</p>
+<ul class="nav flex-column fs-4">
+    <li class="nav-item"><a class="nav-link" href="{% url 'users:contactInfo' user.id %}">manage contact info</a></li>
+    <li class="nav-item"><a class="nav-link" href="{% url 'shop:purchases' %}">Purchase History</a></li>
 </ul>
 {% endblock %}

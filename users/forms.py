@@ -1,14 +1,52 @@
 from django import forms
 
 class RegistrationForm(forms.Form):
-    username = forms.CharField(label="username")
-    email = forms.EmailField(label="Email")
-    password = forms.CharField(label="Password", widget=forms.PasswordInput())
-    confirmation_password = forms.CharField(label="Confirm password", widget=forms.PasswordInput())
+    username = forms.CharField(label="username", widget=forms.TextInput(
+        attrs={
+        'class':'form-control my-2',
+        }
+    ))
+    email = forms.EmailField(label="Email", widget=forms.TextInput(
+        attrs={
+        'class':'form-control my-2',
+        }
+    ))
+    password = forms.CharField(label="Password", widget=forms.TextInput(
+        attrs={
+        'type': 'password',
+        'class':'form-control my-2',
+        }
+    ))
+    confirmation_password = forms.CharField(label="Confirm password", widget=forms.TextInput(
+        attrs={
+        'type': 'password',
+        'class':'form-control my-2',
+        }
+    ))
 
 class ContactForm(forms.Form):
-    first_name = forms.CharField(label="First Name")
-    last_name = forms.CharField(label="Last Name")
-    address = forms.CharField(label="Address")
-    phone_number = forms.CharField(label="Phone Number", widget=forms.TextInput(attrs={'type':'number'}))
-    postal_code = forms.CharField(label="zip code", widget=forms.TextInput(attrs={'type':'number'}))
+    first_name = forms.CharField(label="First Name", widget=forms.TextInput(
+        attrs={
+        'class':'form-control my-2',
+        }
+    ))
+    last_name = forms.CharField(label="Last Name", widget=forms.TextInput(
+        attrs={
+        'class':'form-control my-2',
+        }
+    ))
+    address = forms.CharField(label="Address", widget=forms.TextInput(
+        attrs={
+        'class':'form-control my-2',
+        }
+    ))
+    phone_number = forms.IntegerField(label="Phone Number", widget=forms.TextInput(
+        attrs={
+        'class':'form-control my-2',
+        }
+    ))
+    postal_code = forms.IntegerField(label="zip code", widget=forms.TextInput(
+        attrs={
+        'class':'form-control my-2',
+        }
+    ))

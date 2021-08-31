@@ -3,9 +3,16 @@
     {% if message %}
     <div>{{ message }}</div>
     {% endif %}
-    <form action="{% url 'users:register' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Register</button>
-    </form>
+    <div class="card border-dark p-5 mx-auto my-5" style="width: 30rem;">
+        <h4 class="text-center">
+            Register
+        </h4>
+        <form action="{% url 'users:register' %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <div class="text-end mt-4">
+                <button class="btn btn-dark btn-md" type="submit">Register</button>
+            </div>
+            </form>
+    </div>
 {% endblock %}

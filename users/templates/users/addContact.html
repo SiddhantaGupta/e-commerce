@@ -1,11 +1,15 @@
 {% extends "shop/layout.html" %}
 
 {% block body %}
-
-<form action="{% url 'users:addContact' user.id %}" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button type="submit">Add Contact</button>
-</form>
+<div class="card border-dark w-75 p-5 mx-auto my-5">
+    <p class="text-center fs-4">Add a new Contact Address</p>
+    <form action="{% url 'users:addContact' user.id %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <div class="text-end mt-4">
+            <button type="submit" class="btn btn-dark btn-md">Add Contact</button>
+        </div>
+    </form>
+</div>
 
 {% endblock %}

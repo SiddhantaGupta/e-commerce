@@ -2,20 +2,20 @@
 
 {% block body %}
 
-<p>Purchase process for {{ product.title }}</p>
+<p class="alert alert-primary fs-3 text-center" role="alert">Select purchase options for {{ product.title }}</p>
 
 <form action="{% url 'shop:purchase' product.id %}" method="post">
     {% csrf_token %}
-    <label for="address">Choose a delivery address</label>
-    <select id="address" name="address">
+    <label class="form-label fs-4" for="address">Choose a delivery address</label>
+    <select class="form-select p-2 fs-4 m-2 w-75" id="address" name="address">
         <option value="">--select address--</option>
         {% for address in addresses %}
         <option value="{{ address.id }}">{{ address.address }}</option>
         {% endfor %}
     </select>
-    <label for="quantity">Quantity</label>
-    <input type="integer" id="quantity" name="quantity">
-    <button type="submit">Buy</button>
+    <label class="form-label fs-4" for="quantity">Quantity</label>
+    <input class="form-control p-2 fs-4 m-2 w-75" type="integer" id="quantity" name="quantity">
+    <button class="btn btn-dark btn-lg" type="submit">Buy</button>
 </form>
 
 {% endblock %}

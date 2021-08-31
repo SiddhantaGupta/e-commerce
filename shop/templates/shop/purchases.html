@@ -1,17 +1,21 @@
 {% extends "shop/layout.html" %}
 
 {% block body %}
+<div class="container-fluid">
+    <div class="row">
 
-{% for purchase in purchases %}
-
-<div>
-    Item Purchased: <a href="{% url 'shop:product' purchase.product.id %}">{{ purchase.product.title }}</a>
-    <p>Quantity Purchased: {{ purchase.quantity }}</p>
+        
+        {% for purchase in purchases %}
+        
+        <div class="card col-6 m-4 p-4 bg-light" style="width: 25rem;">
+            <p class="fs-4"><b>Item Purchased:</b> <a href="{% url 'shop:product' purchase.product.id %}">{{ purchase.product.title }}</a><br>
+            <b>Quantity Purchased:</b> {{ purchase.quantity }}</p>
+            </div>
+            
+            {% empty %}
+            <p class="alert alert-primary fs-1 text-center" role="alert">You have not made any purchases.</p>
+            {% endfor %}
+    </div>
 </div>
-    
-{% empty %}
-<p>You have not made any purchases.</p>
-
-{% endfor %}
 
 {% endblock %}

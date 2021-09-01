@@ -20,7 +20,7 @@
     <div class="row">
         {% for product in latest_products %}
         <div class="col-4 mx-auto">
-            <div class="card bg-light p-4 m-2">
+            <div class="card border-dark bg-light p-4 m-2">
                 <a href="{% url 'shop:product' product.id %}">
                 <img class="card-img-top mx-auto d-block img-thumbnail" style="height: 250px; width: 200px;" src="{{product.image.url}}">
                 <div class="card-body">

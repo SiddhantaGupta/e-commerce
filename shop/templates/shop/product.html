@@ -7,7 +7,6 @@
     <div class="d-inline-block align-middle p-2 m-4 text-center" style="width: 70%;">
         <h2 style="font-size: 50px;">{{ product.title }}</h2><br>
         <div class="text-start fs-4 p-2">
-
             <b>Description:</b> {{ product.description }}<br>
             <b>Price:</b> &#8377; {{ product.price }}<br>
             <b>No. of Item in stock:</b> {{ product.quantity }}<br>
@@ -15,8 +14,8 @@
             <b>Posted On:</b> {{ product.date }}
         </div>
 
-    <div class="d-inline-block">
         {% if user.is_authenticated %}
+        <div class="d-inline-block">
         {% if in_cart %}
         <form action="{% url 'cart:remove' product.id %}">
             {% csrf_token %}
@@ -36,18 +35,24 @@
         </form>
     </div>
 </div>
-</div>
 
-<div class="card p-3 m-3 bg-light fs-5" style="width: 50rem;">
-    <form action="{% url 'shop:comment' product.id %}" method="post">
-        {% csrf_token %}
+<div class="card border-dark p-3 m-3 bg-light fs-5" style="width: 100%;">
+<form action="{% url 'shop:comment' product.id %}" method="post">
+    {% csrf_token %}
         <input type="text" class="form-control m-2 w-75 d-inline-block" placeholder="comment" name="comment">
         <button class="btn btn-dark btn-md" type="submit">post</button>
     </form>
-    {% endif %}
     {% for comment in comments %}
-        <p>{{ comment.user.username }}: {{ comment.comment }}</p>
-        {% endfor %}
+    <p>{{ comment.user.username }}: {{ comment.comment }}</p>
+    {% endfor %}
 </div>
+{% else %}
+</div>
+<div class="card border-dark p-3 m-3 bg-light fs-5 text-start" style="width: 100%;">
+    {% for comment in comments %}
+    <p>{{ comment.user.username }}: {{ comment.comment }}</p>
+    {% endfor %}
+</div>
+{% endif %}
 
 {% endblock %}

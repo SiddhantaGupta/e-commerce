@@ -7,7 +7,7 @@
         
         {% for purchase in purchases %}
         
-        <div class="card col-6 m-4 p-4 bg-light" style="width: 25rem;">
+        <div class="card border-dark col-6 m-4 p-4 bg-light" style="width: 25rem;">
             <p class="fs-4"><b>Item Purchased:</b> <a href="{% url 'shop:product' purchase.product.id %}">{{ purchase.product.title }}</a><br>
             <b>Quantity Purchased:</b> {{ purchase.quantity }}</p>
             </div>

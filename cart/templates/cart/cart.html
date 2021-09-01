@@ -1,11 +1,11 @@
 {% extends "shop/layout.html" %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         {% for wish in wishlist %}
         <div class="col-4 mx-auto">
-            <div class="card bg-light p-4 m-2">
+            <div class="card border-dark bg-light p-4 m-2">
                 <a href="{% url 'shop:product' wish.product.id %}">
                 <img class="card-img-top mx-auto d-block img-thumbnail" style="height: 250px; width: 200px;" src="{{wish.product.image.url}}">
                 <div class="card-body">

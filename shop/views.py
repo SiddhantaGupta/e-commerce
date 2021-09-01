@@ -32,7 +32,7 @@ def search(request):
 
 def product(request, id):
     product = Products.objects.get(pk=id)
-    comments = Comments.objects.filter(product=product)
+    comments = Comments.objects.filter(product=product).order_by("-pk")
     in_cart = False
     if request.user.is_authenticated:
         wishlist = Cart.objects.filter(user=request.user)

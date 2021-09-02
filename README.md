@@ -9,8 +9,8 @@ This project is an E-commerce website the backend is made using Django, a Python
 
 ## How to Run?
 This project was created using Django web framework. To run the project
-- clone the github repository.
-- install Python3.
-- install Django.
-- cd into the e_commerce directory.
-- run command `python3 manage.py runserver` to start the server.
+1. clone the github repository.
+2. install Python3.
+3. install Django.
+4. cd into the e_commerce directory.
+5. run command `python3 manage.py runserver` to start the server.

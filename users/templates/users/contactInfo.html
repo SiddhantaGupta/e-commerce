@@ -10,7 +10,7 @@
 
         {% for address in addresses %}
         <div class="col border-dark card p-4 m-4 bg-light" style="width: 25rem;">
-            <p class="fs-4"><b>Name:</b> {{ address.first_name }}{{ address.last_name }}<br>
+            <p class="fs-4"><b>Name:</b> {{ address.first_name }} {{ address.last_name }}<br>
             <b>Address:</b> {{ address.address }}<br>
             <b>Phone Number:</b> {{ address.phone_number }}<br>
             <b>ZIP code:</b> {{ address.postal_code }}<br></p>
